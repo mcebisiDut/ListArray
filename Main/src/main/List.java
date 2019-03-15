@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main;
 
 /**
@@ -36,32 +31,65 @@ public class List implements ListArray {
 
     public boolean add(int position, int item) {
         boolean isSuccessful = false;
-        if (!isFull() && valid(position)) {
+        if (valid(position)) {
             lastItem++;
             openGap(position);
             list[position] = item;
         }
-        
+
         return isSuccessful;
     }
 
     public int remove(int position) {
         int removedItem = 0;
-        if (!isEmpty() && available(position)) {
+        if (available(position)) {
             removedItem = list[position];
             closeGap(position);
             lastItem--;
         }
-        
+
         return removedItem;
+    }
+
+    public boolean replace(int position, int item) {
+        boolean isSuccessful = false;
+        if (available(position)) {
+            list[position] = item;
+            isSuccessful = true;
+        }
+        return isSuccessful;
+    }
+
+    public boolean contains(int item) {
+        boolean isAvailable = false;
+        if (!isEmpty()) {
+            isAvailable = search(item);
+        }
+
+        return isAvailable;
+    }
+
+    public int getItem(int position) {
+        int value = 0;
+        if (available(position)) {
+            value = list[position];
+        }
+        
+        return value;
+    }
+
+    public int getLength() {
+        return (lastItem + 1);
+    }
+
+    public void display() {
+        for (int index = 0; index <= lastItem; index++) {
+            System.out.println(list[index]);
+        }
     }
 
     public void clear() {
         lastItem = -1;
-    }
-
-    public int getLength() {
-        return lastItem + 1;
     }
 
     public boolean isFull() {
@@ -72,14 +100,8 @@ public class List implements ListArray {
         return (lastItem == -1);
     }
 
-    public void display() {
-        for (int index = 0; index <= lastItem ; index++) {
-            System.out.println(list[index]);
-        }
-    }
-
     private boolean valid(int position) {
-        return (position > -1 && position <= lastItem + 1);
+        return (!isFull() && position > -1 && position <= lastItem + 1);
     }
 
     private void openGap(int position) {
@@ -89,12 +111,24 @@ public class List implements ListArray {
     }
 
     private boolean available(int position) {
-        return (position > -1 && position <= lastItem);
+        return (!isEmpty() && position > -1 && position <= lastItem);
     }
 
     private void closeGap(int position) {
         for (int index = position; index < lastItem; index++) {
             list[index] = list[index + 1];
         }
+    }
+
+    private boolean search(int item) {
+        boolean contains = false;
+        for (int index = 0; index <= lastItem; index++) {
+            if (list[index] == item) {
+                contains = true;
+                index = lastItem;
+            }
+        }
+
+        return contains;
     }
 }
