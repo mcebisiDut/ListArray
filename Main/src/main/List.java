@@ -57,6 +57,7 @@ public class List implements ListArray {
             list[position] = item;
             isSuccessful = true;
         }
+        
         return isSuccessful;
     }
 
