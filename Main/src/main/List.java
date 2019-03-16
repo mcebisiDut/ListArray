@@ -94,7 +94,20 @@ public class List implements ListArray {
     }
 
     public boolean isFull() {
-        return (list.length == lastItem + 1);
+        boolean isFull = (list.length == lastItem + 1);
+        if(isFull){
+            resizeArray();
+            isFull = (list.length == lastItem + 1);
+        }
+        return isFull;
+    }
+
+    private void resizeArray() {
+        int [] resizedList = new int [list.length  * 2];
+        for (int index = 0; index < list.length; index++) {
+            resizedList[index] = list[index];
+        }
+        list = resizedList;
     }
 
     public boolean isEmpty() {

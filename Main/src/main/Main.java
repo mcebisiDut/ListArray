@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         
-        ListArray MyList = new List(20);
+        ListArray MyList = new List(2);
         MyList.add(20);
         MyList.add(20);
         MyList.add(1,30);
