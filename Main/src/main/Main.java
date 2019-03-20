@@ -12,6 +12,8 @@ public class Main {
         MyList.add(20);
         MyList.add(1,30);
         MyList.display();
+        System.out.println("Max is : ".concat(Integer.toString(MyList.getMax())));
+        System.out.println("Min is : ".concat(Integer.toString(MyList.getMin())));
         System.out.println("===========================");
         MyList.replace(0, 10);
         MyList.display();
