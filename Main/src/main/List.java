@@ -81,7 +81,7 @@ public class List implements ListArray {
 
     public int getMax() {
         int max = list[0];
-        for (int index = 0; index <= lastPosition; index++) {
+        for (int index = 1; index <= lastPosition; index++) {
             if (list[index] > max) {
                 max = list[index];
             }
@@ -92,7 +92,7 @@ public class List implements ListArray {
 
     public int getMin() {
         int min = list[0];
-        for (int index = 0; index <= lastPosition; index++) {
+        for (int index = 1; index <= lastPosition; index++) {
             if (list[index] < min) {
                 min = list[index];
             }
