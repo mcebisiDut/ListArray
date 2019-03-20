@@ -11,6 +11,8 @@ public interface ListArray {
     public boolean replace(int position, int item);
     public boolean contains(int item);
     public int getItem(int position);
+    public int getMax();
+    public int getMin();
     public int getLength();
     public void display();
     public void clear();
