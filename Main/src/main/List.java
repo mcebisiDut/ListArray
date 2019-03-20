@@ -7,7 +7,7 @@ package main;
 public class List implements ListArray {
 
     private int[] list;
-    private int lastItem;
+    private int lastPosition;
     private static final int maxSize = 50;
 
     List() {
@@ -15,15 +15,15 @@ public class List implements ListArray {
     }
 
     List(int item) {
-        lastItem = -1;
+        lastPosition = -1;
         list = new int[item];
     }
 
     public boolean add(int item) {
         boolean isSuccessful = false;
         if (!isFull()) {
-            lastItem++;
-            list[lastItem] = item;
+            lastPosition++;
+            list[lastPosition] = item;
         }
 
         return isSuccessful;
@@ -32,7 +32,7 @@ public class List implements ListArray {
     public boolean add(int position, int item) {
         boolean isSuccessful = false;
         if (valid(position)) {
-            lastItem++;
+            lastPosition++;
             openGap(position);
             list[position] = item;
         }
@@ -45,7 +45,7 @@ public class List implements ListArray {
         if (available(position)) {
             removedItem = list[position];
             closeGap(position);
-            lastItem--;
+            lastPosition--;
         }
 
         return removedItem;
@@ -81,7 +81,7 @@ public class List implements ListArray {
 
     public int getMax() {
         int max = list[0];
-        for (int index = 0; index <= lastItem; index++) {
+        for (int index = 0; index <= lastPosition; index++) {
             if (list[index] > max) {
                 max = list[index];
             }
@@ -92,7 +92,7 @@ public class List implements ListArray {
 
     public int getMin() {
         int min = list[0];
-        for (int index = 0; index <= lastItem; index++) {
+        for (int index = 0; index <= lastPosition; index++) {
             if (list[index] < min) {
                 min = list[index];
             }
@@ -102,30 +102,30 @@ public class List implements ListArray {
     }
 
     public int getLength() {
-        return (lastItem + 1);
+        return (lastPosition + 1);
     }
 
     public void display() {
-        for (int index = 0; index <= lastItem; index++) {
+        for (int index = 0; index <= lastPosition; index++) {
             System.out.println(list[index]);
         }
     }
 
     public void clear() {
-        lastItem = -1;
+        lastPosition = -1;
     }
 
     public boolean isFull() {
-        boolean isFull = (list.length == lastItem + 1);
+        boolean isFull = (list.length == lastPosition + 1);
         if (isFull) {
             resizeArray();
-            isFull = (list.length == lastItem + 1);
+            isFull = (list.length == lastPosition + 1);
         }
         return isFull;
     }
 
     public boolean isEmpty() {
-        return (lastItem == -1);
+        return (lastPosition == -1);
     }
 
     private void resizeArray() {
@@ -137,31 +137,31 @@ public class List implements ListArray {
     }
 
     private boolean valid(int position) {
-        return (!isFull() && position > -1 && position <= lastItem + 1);
+        return (!isFull() && position > -1 && position <= lastPosition + 1);
     }
 
     private void openGap(int position) {
-        for (int index = lastItem; index > position; index--) {
+        for (int index = lastPosition; index > position; index--) {
             list[index] = list[index - 1];
         }
     }
 
     private boolean available(int position) {
-        return (!isEmpty() && position > -1 && position <= lastItem);
+        return (!isEmpty() && position > -1 && position <= lastPosition);
     }
 
     private void closeGap(int position) {
-        for (int index = position; index < lastItem; index++) {
+        for (int index = position; index < lastPosition; index++) {
             list[index] = list[index + 1];
         }
     }
 
     private boolean search(int item) {
         boolean contains = false;
-        for (int index = 0; index <= lastItem; index++) {
+        for (int index = 0; index <= lastPosition; index++) {
             if (list[index] == item) {
                 contains = true;
-                index = lastItem;
+                index = lastPosition;
             }
         }
 
