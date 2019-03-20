@@ -57,7 +57,7 @@ public class List implements ListArray {
             list[position] = item;
             isSuccessful = true;
         }
-        
+
         return isSuccessful;
     }
 
@@ -75,8 +75,30 @@ public class List implements ListArray {
         if (available(position)) {
             value = list[position];
         }
-        
+
         return value;
+    }
+
+    public int getMax() {
+        int max = list[0];
+        for (int index = 0; index <= lastItem; index++) {
+            if (list[index] > max) {
+                max = list[index];
+            }
+        }
+
+        return max;
+    }
+
+    public int getMin() {
+        int min = list[0];
+        for (int index = 0; index <= lastItem; index++) {
+            if (list[index] < min) {
+                min = list[index];
+            }
+        }
+
+        return min;
     }
 
     public int getLength() {
@@ -95,23 +117,23 @@ public class List implements ListArray {
 
     public boolean isFull() {
         boolean isFull = (list.length == lastItem + 1);
-        if(isFull){
+        if (isFull) {
             resizeArray();
             isFull = (list.length == lastItem + 1);
         }
         return isFull;
     }
 
+    public boolean isEmpty() {
+        return (lastItem == -1);
+    }
+
     private void resizeArray() {
-        int [] resizedList = new int [list.length  * 2];
+        int[] resizedList = new int[list.length * 2];
         for (int index = 0; index < list.length; index++) {
             resizedList[index] = list[index];
         }
         list = resizedList;
-    }
-
-    public boolean isEmpty() {
-        return (lastItem == -1);
     }
 
     private boolean valid(int position) {
